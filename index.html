@@ -4,7 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>智能图示管理系统(IGMS) - 专业的图像与设计素材管理工具</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- 预连接关键资源 -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://github.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    
+    <!-- 异步加载Font Awesome -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
+    
+    <!-- 内联关键CSS -->
     <style>
         :root {
             --primary: #0078D4;
@@ -32,7 +42,7 @@
         }
         
         .container {
-            max-width: 1200极速开箱助手px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
@@ -66,6 +76,7 @@
         .logo img {
             height: 40px;
             width: auto;
+            max-width: 100%;
         }
         
         .logo-text {
@@ -214,6 +225,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            max-width: 100%;
         }
         
         .prev, .next {
@@ -439,9 +451,9 @@
             max-width: 800px;
             margin: 0 auto;
             background: rgba(13, 17, 23, 0.9);
-            border-radius: 极速开箱助手15px;
+            border-radius: 15px;
             padding: 40px;
-            border: 1px solid rgba(48, 54, 61, 0.极速开箱助手5);
+            border: 1px solid rgba(48, 54, 61, 0.5);
             backdrop-filter: blur(10px);
         }
         
@@ -508,6 +520,7 @@
             height: 160px;
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 100%;
         }
 
         /* 弹窗样式 */
@@ -663,8 +676,8 @@
         <div class="container">
             <div class="navbar">
                 <div class="logo">
-                    <!-- 修复后的相对路径 -->
-                    <img src="images/logo.png" alt="IGMS Logo">
+                    <!-- 添加宽度/高度属性和加载提示 -->
+                    <img src="images/logo.png" alt="IGMS Logo" width="40" height="40" loading="eager">
                     <div class="logo-text">IGMS</div>
                 </div>
                 <div class="nav-links">
@@ -692,17 +705,17 @@
                 </div>
                 <div class="hero-image">
                     <div class="slideshow-container">
-                        <!-- 幻灯片容器 - 修复后的相对路径 -->
+                        <!-- 添加懒加载和尺寸属性 -->
                         <div class="mySlides fade">
-                            <img src="images/home.png" alt="首页截图">
+                            <img src="images/home.png" alt="首页截图" loading="eager" width="600" height="338">
                         </div>
                         
                         <div class="mySlides fade">
-                            <img src="images/add-image.png" alt="添加图像">
+                            <img src="images/add-image.png" alt="添加图像" loading="lazy" width="600" height="338">
                         </div>
                         
                         <div class="mySlides fade">
-                            <img src="images/move.png" alt="移动功能">
+                            <img src="images/move.png" alt="移动功能" loading="lazy" width="600" height="338">
                         </div>
                         
                         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -807,7 +820,6 @@
                         </div>
                         <h3>Windows 安装版</h3>
                         <p class="download-size">安装程序 (.exe) | 38MB</p>
-                        <!-- 安装版按钮 - 点击弹出"敬请期待"提示 -->
                         <a href="#" class="btn" onclick="showComingSoon(); return false;">下载安装版 <i class="fas fa-download"></i></a>
                     </div>
                     
@@ -817,8 +829,14 @@
                         </div>
                         <h3>便携绿色版</h3>
                         <p class="download-size">直接运行 (.exe) | 32MB</p>
-                        <!-- 绿色版按钮 - 下载IGMS.exe -->
-                        <a href="IGMS.exe" class="btn" download="IGMS.exe">下载绿色版 <i class="fas fa-download"></i></a>
+                        <!-- 使用CDN加速下载链接 -->
+                        <a href="https://cdn.jsdelivr.net/gh/Mr-Yung/igms@main/IGMS.exe" 
+                           class="btn" 
+                           download="IGMS.exe"
+                           id="downloadBtn">
+                            下载绿色版 <i class="fas fa-download"></i>
+                        </a>
+                        <p class="download-tip">💡 下载慢？<a href="IGMS.exe" download>使用原始下载</a></p>
                     </div>
                 </div>
             </div>
@@ -835,8 +853,8 @@
                 </div>
                 <div class="contact-right">
                     <div class="qr-container">
-                        <!-- 修复后的二维码相对路径 -->
-                        <img src="images/qr-code.png" alt="微信公众号二维码">
+                        <!-- 添加尺寸属性和加载提示 -->
+                        <img src="images/qr-code.png" alt="微信公众号二维码" width="160" height="160" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -860,7 +878,47 @@
         </div>
     </div>
 
+    <!-- 预加载关键资源 -->
+    <link rel="preload" href="images/home.png" as="image">
+    <link rel="preload" href="IGMS.exe" as="fetch" crossorigin="anonymous">
+    
+    <!-- 异步加载脚本 -->
     <script>
+        // 异步加载关键资源
+        function loadScript(src, callback) {
+            const script = document.createElement('script');
+            script.src = src;
+            script.async = true;
+            script.onload = callback;
+            document.head.appendChild(script);
+        }
+        
+        // 图片预加载器
+        function preloadImages() {
+            const images = [
+                'images/add-image.png',
+                'images/move.png',
+                'images/qr-code.png'
+            ];
+            
+            images.forEach(src => {
+                const img = new Image();
+                img.src = src;
+            });
+        }
+        
+        // 初始加载后执行
+        window.addEventListener('DOMContentLoaded', () => {
+            // 预加载次要图片
+            preloadImages();
+            
+            // 添加下载事件监听
+            document.getElementById('downloadBtn').addEventListener('click', function() {
+                // 添加下载统计（可选）
+                console.log('EXE下载开始:', new Date().toISOString());
+            });
+        });
+        
         // 完整的幻灯片功能代码
         let slideIndex = 1;
         showSlides(slideIndex);
